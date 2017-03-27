@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:Poke.AperUber.Helpers"
+             x:Class="Poke.AperUber.Views.OrderView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <helpers:BooleanConverterHelper x:Key="inverter"/>
+
+            <Style x:Key="TitleGridLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="TextColor"         Value="White"/>
+                <Setter Property="FontSize"          Value="20"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Nom" Style="{StaticResource TitleGridLabel}"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <Label Text="Quantité" Style="{StaticResource TitleGridLabel}"
+                       Grid.Row="0" Grid.Column="2"/>
+                <Label Text="Prix" Style="{StaticResource TitleGridLabel}"
+                       Grid.Row="0" Grid.Column="3"/>
+            </Grid>
+            <ListView x:Name="OrderedItems"
+                      RowHeight="70"
+                      IsVisible="{Binding IsEmpty, Converter={StaticResource inverter}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.75*"/>
+                                    <ColumnDefinition Width="1.25*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Product.Image}" Aspect="AspectFill"
+                                       Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding Product.Name}"
+                                       VerticalOptions="Center"
+                                       Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="{Binding Quantity}"
+                                       VerticalOptions="Center" HorizontalOptions="Center"
+                                       Grid.Row="0" Grid.Column="2"/>
+                                <StackLayout Orientation="Horizontal"
+                                             Grid.Row="0" Grid.Column="3"
+                                             HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="{Binding SubTotal}" />
+                                    <Label Text=" €" />
+                                </StackLayout>
+                                
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         IsVisible="{Binding IsEmpty}">
+                <Label Text="Votre panier est vide."
+                       FontSize="20"
+                       Margin="15"
+                       HorizontalTextAlignment="Center"/>
+                <Image Source="caddie.png"
+                       VerticalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+
+</ContentPage>

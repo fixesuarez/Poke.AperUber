@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Poke.AperUber.Views.ProductListView"
+             Title="{Binding Title}">
+
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="#ddd">
+            <ListView x:Name="listProducts"
+                      RowHeight="170"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid Margin="0, 4, 0, 0"
+                                      Padding="7"
+                                      BackgroundColor="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="{Binding Product.Image}"
+                                           Aspect="AspectFill"
+                                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"/>
+                                    <Label Text="{Binding Product.Name}"
+                                           TextColor="Black"
+                                           FontSize="20"
+                                           VerticalTextAlignment="Start"
+                                           HorizontalTextAlignment="Center"
+                                           Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
+                                    <StackLayout Orientation="Horizontal"
+                                                 Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3">
+                                        <Label Text="{Binding Product.Price}"
+                                               Margin="10, 0, 0, 0"
+                                               FontSize="20"
+                                               VerticalTextAlignment="Center"
+                                               FontAttributes="Bold"/>
+                                        <Label Text=" €"
+                                               FontSize="20"
+                                               VerticalTextAlignment="Center"
+                                               FontAttributes="Bold"/>
+                                        <Button Text="-"
+                                                HorizontalOptions="EndAndExpand"
+                                                ClassId="{Binding Product.Name}"
+                                                WidthRequest="45"
+                                                Clicked="OnQuantityChanged"
+                                                Grid.Row="1" Grid.Column="1" />
+                                        <Label Text="{Binding Quantity}"
+                                               Margin="5, 0, 5, 0"
+                                               TextColor="Black"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalOptions="Center"
+                                               Grid.Row="1" Grid.Column="2" />
+                                        <Button Text="+"
+                                                ClassId="{Binding Product.Name}"
+                                                WidthRequest="45"
+                                                Clicked="OnQuantityChanged"
+                                                Grid.Row="1" Grid.Column="3" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal"
+                                                 VerticalOptions="EndAndExpand"
+                                                 Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+                                        <Label Text="Sous-total :"
+                                               TextColor="Black"
+                                               Margin="65, 0, 0, 0" />
+                                        <Label Text="{Binding SubTotal}"
+                                               TextColor="Black"
+                                               HorizontalOptions="EndAndExpand"/>
+                                        <Label Text=" €" 
+                                               TextColor="Black"
+                                               HorizontalOptions="End" />
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Poke.AperUber.Views.CategoriesView">
+
+    <ContentPage.Content>
+        <StackLayout x:Name="fullContent">
+            <ScrollView BackgroundColor="#ddd"
+                        x:Name="scrollCategories">
+                <ListView x:Name="listFoodCategories"
+                          RowHeight="270"
+                          SeparatorVisibility="None">
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout ClassId="{Binding Name}">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped" />
+                                    </StackLayout.GestureRecognizers>
+                                    <StackLayout Margin="0, 7, 0, 0"
+                                                 Padding="15, 0, 15, 15"
+                                                 BackgroundColor="White">
+                                        <Label Text="{Binding Name}"
+                                                VerticalTextAlignment="Center"
+                                                FontSize="22"
+                                                HeightRequest="75"
+                                                TextColor="Black" />
+                                        <Image Source="{Binding Cover}"
+                                                HeightRequest="180"
+                                                WidthRequest="280"
+                                                Aspect="AspectFill" />
+                                        <StackLayout Orientation="Horizontal"
+                                                        HeightRequest="75">
+                                            <Label Text="#Bocadillo - #Goyave"
+                                                    FontSize="14"
+                                                    VerticalTextAlignment="Center"/>
+                                            <Label Text="MOINS DE 40 MIN"
+                                                    FontSize="12"
+                                                    VerticalTextAlignment="Center"
+                                                    HorizontalOptions="EndAndExpand"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
