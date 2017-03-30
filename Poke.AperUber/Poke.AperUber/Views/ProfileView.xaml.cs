@@ -13,11 +13,11 @@ namespace Poke.AperUber.Views
         public ProfileView()
         {
             InitializeComponent();
-            createAccountButton.Clicked += ( s, e ) =>
-            {
-                DependencyService.Get<IAccountService>().SaveCredentials( Email.Text, Password.Text );
-            };
-            Email.Unfocused += ( s, e ) =>
+            //createAccountButton.Clicked += ( s, e ) =>
+            //{
+            //    DependencyService.Get<IAccountService>().SaveCredentials( inputEmail.Text, inputPassword.Text );
+            //};
+            inputEmail.Unfocused += ( s, e ) =>
             {
                 Entry userNameEntry = (Entry) s;
                 if( !emailRegex.IsMatch( userNameEntry.Text ) )
@@ -25,6 +25,20 @@ namespace Poke.AperUber.Views
                 else
                     userNameErrorMessage.IsVisible = false;
             };
+            inputPassword.Unfocused += ( s, e ) =>
+            {
+                Entry passwordEntry = (Entry) s;
+                if( !string.IsNullOrWhiteSpace( passwordEntry.Text ) )
+                {
+                    logInButton.IsEnabled = true;
+                    createAccountButton.IsEnabled = true;
+                }
+            };
+        }
+
+        public void Connect( string emailUser, string password )
+        {
+
         }
     }
 }

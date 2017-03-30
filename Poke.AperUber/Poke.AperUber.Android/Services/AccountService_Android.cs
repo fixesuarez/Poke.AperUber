@@ -52,7 +52,13 @@ namespace Poke.AperUber.Droid.Services
         }
         public bool AreValidIdentifiers( string userName, string password )
         {
-
+            Account account = AccountStore.Create( Forms.Context ).FindAccountsForService( App.AppName ).FirstOrDefault( u => u.Username == userName );
+            if( account != null )
+            {
+                if( account.Properties["Password"] != null && account.Properties["Password"] == password )
+                    return true;
+            }
+            return false;
         }
     }
 }

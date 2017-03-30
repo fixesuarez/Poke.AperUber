@@ -39,5 +39,10 @@ namespace Poke.AperUber.Views
             public string Operation { get; set; }
             public string NameProductToChange { get; set; }
         }
+
+        protected override void OnDisappearing()
+        {
+            Navigation.PopModalAsync();
+        }
     }
 }
